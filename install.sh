@@ -1,9 +1,9 @@
 # initialization
-sudo apt-get update && sudo apt-get upgrade
+yes | sudo apt-get update && yes | sudo apt-get upgrade
 cd ~
-sudo apt install mc python-pip python3-pip
+sudo apt-get -y install mc python-pip python3-pip
 wget https://bootstrap.pypa.io/get-pip.py
-sudo python3 get-pip.py
+sudo yes | python3 get-pip.py
 alias python=python3
 alias pip=pip3
 
