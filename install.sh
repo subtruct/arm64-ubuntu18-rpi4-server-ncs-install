@@ -3,7 +3,7 @@ yes | sudo apt-get update && yes | sudo apt-get upgrade
 cd ~
 sudo apt-get -y install mc python-pip python3-pip
 wget https://bootstrap.pypa.io/get-pip.py
-sudo yes | python3 get-pip.py
+yes | sudo python3 get-pip.py
 alias python=python3
 alias pip=pip3
 
@@ -18,6 +18,8 @@ echo -e "\n# ncs and virtualenvwrapper" >> ~/.bashrc
 echo "export WORKON_HOME=$HOME/.ncs" >> ~/.bashrc
 echo "export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3" >> ~/.bashrc
 echo "source /usr/local/bin/virtualenvwrapper.sh" >> ~/.bashrc
+echo "alias python=python3" >> ~/.bashrc
+echo "alias pip=pip3" >> ~/.bashrc
 echo "workon ncs" >> ~/.bashrc
 source ~/.bashrc
 
