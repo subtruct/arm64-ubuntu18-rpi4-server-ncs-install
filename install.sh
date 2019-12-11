@@ -3,33 +3,38 @@ sudo apt -y update && sudo apt -y upgrade
 cd ~
 sudo apt -y install wget mc python python3 python-pip python3-pip 
 sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 1
-sudo update-alternatives --config python3
-sudo rm -rf ~/get-pip.py ~/.cache/pip
-sudo rm -rf ~/.cache 
 wget https://bootstrap.pypa.io/get-pip.py
 sudo python3 get-pip.py
+sudo pip install virtualenv virtualenvwrapper
+sudo rm -rf ~/get-pip.py ~/.cache/pip
 
 # virtualenv and virtualenvwrapper
-pip install virtualenv virtualenvwrapper --user
-export WORKON_HOME=~/.virtualenvs
-export VIRTUALENVWRAPPER_PYTHON=~/cv/lib/python3.6/site-packages
-export PATH=$PATH:~/.local/bin:/home/ubuntu/.local/bin:~/.local/lib
-source ~/.local/bin/virtualenvwrapper.sh
-~/.local/bin/virtualenv cv -p python3
-source ~/cv/bin/activate
+export WORKON_HOME=$HOME/.virtualenvs
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+source /usr/local/bin/virtualenvwrapper.sh
 
-# virtualenvwrapper
+# virtualenv and virtualenvwrapper
 echo -e "\n# ncs and virtualenvwrapper" >> ~/.bashrc
 echo "export WORKON_HOME=~/.virtualenvs" >> ~/.bashrc
-echo "export VIRTUALENVWRAPPER_PYTHON= ~/.local/lib/python3.6/site-packages" >> ~/.bashrc
-echo "export PATH=PATH:$PATH:~/.local/bin:/home/ubuntu/.local/bin:~/.local/lib" >> /.local/bin
+echo "export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3" >> ~/.bashrc
+echo "source /usr/local/bin/virtualenvwrapper.sh" >> ~/.bashrc
 echo "alias python=python3" >> ~/.bashrc
 echo "alias pip=pip3" >> ~/.bashrc
-echo "source ~/cv/bin/activate" >> ~/.bashrc
 source ~/.bashrc
+mkvirtualenv cv -p python3
+workon cv
 
+cd ~
+wget https://github.com/Kitware/CMake/releases/download/v3.14.4/cmake-3.14.4.tar.gz
+tar xvzf cmake-3.14.4.tar.gz
+cd ~/cmake-3.14.4
+./bootstrap
+make –j4
+make install
+
+cd ~
 #libs & tools
-sudo apt -y install build-essential cmake unzip pkg-config
+sudo apt -y install build-essential unzip pkg-config
 sudo apt -y install libjpeg-dev libpng-dev libtiff-dev
 sudo apt -y install libavcodec-dev libavformat-dev libswscale-dev libv4l-dev
 sudo apt -y install libxvidcore-dev libx264-dev
@@ -37,7 +42,8 @@ sudo spt -y install libcanberra-gtk*
 sudo apt -y install libatlas-base-dev gfortran
 sudo apt -y install libtbb2 libtbb-dev libdc1394-22-dev  libgtk-3-dev 
 
-pip install numpy --user
+~
+pip install numpy 
 sudo usermod -a -G users "$(whoami)"
 
 cd ~
@@ -45,9 +51,9 @@ git clone https://github.com/markjay4k/ncsdk-aarch64.git
 git clone https://github.com/subtruct/arm64-ubuntu18-rpi4-server-ncs-install.git
 sudo cp ~/arm64-ubuntu18-rpi4-server-ncs-install/ncsdk.conf ~/ncsdk-aarch64
 sudo cp ~/arm64-ubuntu18-rpi4-server-ncs-install/ncsdk.conf ~/ncsdk-aarch64/NCSDK-1.12.00.01/ncsdk-aarch64
+cd ~
 cd ncsdk-aarch64
 sudo make install
-source ~/.bashrc
 sudo make api
 
 cd ~
@@ -71,30 +77,19 @@ tar -xvzf l_openvino_toolkit_dev_ubuntu18_p_2019.3.376.tgz
 cd ~
 mkdir -p opencv/build
 cd opencv/build
-cmake -D CMAKE_INSTALL_PREFIX=~/cv \
-      -D PYTHON3_LIBRARY=/usr/local/lib \
-      -D PYTHON3_INCLUDE_DIR=/usr/include/python3.6m \
-      -D PYTHON3_PACKAGES_PATH=~/cv/lib/python3.6/dist-packages \
-      -D PYTHON_DEFAULT_EXECUTABLE=/usr/local/bin \
-      -D BUILD_OPENCV_PYTHON3=yes \
-      -D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib/modules \
-      -D CMAKE_BUILD_TYPE=Release \
-      -D WITH_IPP=OFF \
-      -D BUILD_TESTS=OFF \
-      -D BUILD_PERF_TESTS=OFF \
-      -D BUILD_EXAMPLES=OFF \
-      -D ENABLE_PRECOMPILED_HEADERS=OFF \
-      -D ENABLE_NEON=ON \
-      -D WITH_INF_ENGINE=ON \
-      -D INF_ENGINE_LIB_DIRS="/usr/local/lib" \
-      -D INF_ENGINE_INCLUDE_DIRS="/usr/local/include" \
-      -D CMAKE_FIND_ROOT_PATH="/usr/local/" \
-      -D ENABLE_CXX11=ON ..
+cmake -D CMAKE_BUILD_TYPE=RELEASE \
+    -D CMAKE_INSTALL_PREFIX=/usr/local \
+    -D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib/modules \
+    -D ENABLE_NEON=ON \
+    -D ENABLE_VFPV3=ON \
+    -D BUILD_TESTS=OFF \
+    -D OPENCV_ENABLE_NONFREE=ON \
+    -D INSTALL_PYTHON_EXAMPLES=OFF \
+    -D BUILD_EXAMPLES=OFF ..
 make -j4
 sudo make install
 
 cd ~
-cd ncsdk-aarch64
 sudo make examples
 
 
