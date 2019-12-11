@@ -60,7 +60,34 @@ mv opencv-4.1.1/ opencv/
 mv opencv_contrib-4.1.1/ opencv_contrib/
 
 cd ~
+wget https://download.01.org/opencv/2019/openvinotoolkit/R3/l_openvino_toolkit_dev_ubuntu18_p_2019.3.376.tgz
+tar -xvzf l_openvino_toolkit_dev_ubuntu18_p_2019.3.376.tgz
 
+cd ~
+mkdir -p opencv/build
+cd opencv/build
+cmake -D CMAKE_INSTALL_PREFIX=/usr/local \
+      -D PYTHON3_EXECUTABLE=/usr/bin/python3 \
+      -D PYTHON3_LIBRARY=/usr/lib/python3.7/config-3.7m-arm-linux-gnueabihf/libpython3.7m.so \
+      -D PYTHON3_INCLUDE_DIR=/usr/include/python3.7m \
+      -D PYTHON3_PACKAGES_PATH=/usr/lib/python3/dist-packages \
+      -D PYTHON_DEFAULT_EXECUTABLE=/usr/bin/python3 \
+      -D BUILD_OPENCV_PYTHON3=yes \
+      -D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib/modules \
+      -D CMAKE_BUILD_TYPE=Release \
+      -D WITH_IPP=OFF \
+      -D BUILD_TESTS=OFF \
+      -D BUILD_PERF_TESTS=OFF \
+      -D BUILD_EXAMPLES=OFF \
+      -D ENABLE_PRECOMPILED_HEADERS=OFF \
+      -D ENABLE_NEON=ON \
+      -D WITH_INF_ENGINE=ON \
+      -D INF_ENGINE_LIB_DIRS="/usr/local/lib/python3.7/dist-packages/" \
+      -D INF_ENGINE_INCLUDE_DIRS="/usr/local/lib/python3.7/dist-packages/openvino/inference_engine/" \
+      -D CMAKE_FIND_ROOT_PATH="/l_openvino_toolkit_dev_ubuntu18_p_2019.3.376/" \
+      -D ENABLE_CXX11=ON ..
+#ake -j4
+#udo make install
 
 
 
