@@ -37,8 +37,6 @@ sudo spt -y install libcanberra-gtk*
 sudo apt -y install libatlas-base-dev gfortran
 sudo apt -y install libtbb2 libtbb-dev libdc1394-22-dev  libgtk-3-dev 
 
-
-
 pip install numpy --user
 sudo usermod -a -G users "$(whoami)"
 
@@ -73,7 +71,6 @@ tar -xvzf l_openvino_toolkit_dev_ubuntu18_p_2019.3.376.tgz
 cd ~
 mkdir -p opencv/build
 cd opencv/build
-
 cmake -D CMAKE_INSTALL_PREFIX=~/cv \
       -D PYTHON3_LIBRARY=/usr/local/lib \
       -D PYTHON3_INCLUDE_DIR=/usr/include/python3.6m \
@@ -100,11 +97,6 @@ cd ~
 cd ncsdk-aarch64
 sudo make examples
 
-source ~/.bashrc
-
-
-
-cd ~/cv/include
 
 
 
