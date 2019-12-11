@@ -1,32 +1,31 @@
 # initialization
-yes | sudo apt-get update && yes | sudo apt-get upgrade
+sudo apt -y update && sudo apt -y upgrade
 cd ~
-sudo apt-get -y install mc python-pip python3-pip
+sudo apt-get -y install wget mc python python3 python-pip python3-pip python3.7-dev
 wget https://bootstrap.pypa.io/get-pip.py
-yes | sudo python3 get-pip.py
+sudo python3 get-pip.py
 alias python=python3
 alias pip=pip3
+sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.7 1
+sudo update-alternatives --config python3
+sudo pip install virtualenv virtualenvwrapper
+sudo rm -rf ~/get-pip.py ~/.cache/pip
 
 # virtualenv and virtualenvwrapper
-sudo yes | pip -q install ncs virtualenvwrapper
-sudo rm -rf ~/get-pip.py ~/.cache/pip
-export WORKON_HOME=$HOME/.ncs
+export WORKON_HOME=$HOME/.virtualenvs
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-
+source /usr/local/bin/virtualenvwrapper.sh
+mkvirtualenv cv -p python3
+ 
 # virtualenvwrapper
 echo -e "\n# ncs and virtualenvwrapper" >> ~/.bashrc
 echo "export WORKON_HOME=$HOME/.ncs" >> ~/.bashrc
 echo "export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3" >> ~/.bashrc
-echo "source /usr/local/bin/virtualenvwrapper.sh" >> ~/.bashrc
 echo "alias python=python3" >> ~/.bashrc
 echo "alias pip=pip3" >> ~/.bashrc
-echo "workon ncs" >> ~/.bashrc
+echo "workon cv" >> ~/.bashrc
 source ~/.bashrc
 
-# python 3.7
-sudo apt-get -y install python3.7-dev
-update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.7 1
-workon cv
 #libs & tools
 sudo apt-get -y install build-essential cmake unzip pkg-config
 sudo apt-get -y install libjpeg-dev libpng-dev libtiff-dev
@@ -35,7 +34,7 @@ sudo apt-get -y install libxvidcore-dev libx264-dev
 sudo apt-get -y install libcanberra-gtk*
 sudo apt-get -y install libatlas-base-dev gfortran
 
-pip -q install numpy==
+sudo pip -q install numpy
 
 
 
