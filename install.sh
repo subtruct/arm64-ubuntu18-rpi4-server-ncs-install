@@ -40,9 +40,10 @@ sudo usermod -a -G users "$(whoami)"
 
 cd ~
 git clone https://github.com/markjay4k/ncsdk-aarch64.git
-cd ncsdk-aarch64
+git clone 
 sudo cp ~/arm64-ubuntu18-rpi4-server-ncs-install/ncsdk.conf ~/ncsdk-aarch64
 sudo cp ~/arm64-ubuntu18-rpi4-server-ncs-install/ncsdk.conf ~/ncsdk-aarch64/NCSDK-1.12.00.01/ncsdk-aarch64
+cd ncsdk-aarch64
 sudo make install
 source ~/.bashrc
 sudo make api
