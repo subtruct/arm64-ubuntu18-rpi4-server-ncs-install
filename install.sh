@@ -20,6 +20,7 @@ source ~/.bashrc
 mkvirtualenv cv -p python3
 workon cv
 
+#CMake installation ... 
 cd
 wget https://github.com/Kitware/CMake/releases/download/v3.14.4/cmake-3.14.4.tar.gz
 tar xvzf cmake-3.14.4.tar.gz
@@ -27,8 +28,10 @@ cd ~/cmake-3.14.4
 ./bootstrap
 make –j4
 sudo make install
+
+#System related res..... 
 cd
-#libs & tools
+#System lib&tools
 sudo apt -y install build-essential unzip pkg-config
 sudo apt -y install libjpeg-dev libpng-dev libtiff-dev
 sudo apt -y install libavcodec-dev libavformat-dev libswscale-dev libv4l-dev
@@ -36,10 +39,14 @@ sudo apt -y install libxvidcore-dev libx264-dev
 sudo apt -y install libcanberra-gtk*
 sudo apt -y install libatlas-base-dev gfortran
 sudo apt -y install libtbb2 libtbb-dev libdc1394-22-dev  libgtk-3-dev 
-cd
-pip install numpy 
-sudo usermod -a -G users "$(whoami)"
 
+#Python main depenzenses 
+pip install scikit-image #caffe dependences 
+pip install google #caffe dependences 
+pip install protobuff 
+pip install numpy 
+
+#Custom NCS SDK/API Installation
 cd
 git clone https://github.com/markjay4k/ncsdk-aarch64.git
 git clone https://github.com/subtruct/arm64-ubuntu18-rpi4-server-ncs-install.git
@@ -49,15 +56,13 @@ cd ~/ncsdk-aarch64
 sudo make install
 sudo make api
 
+#Official NCS SDK/API - UBUNTU v.18 build 2019.3.376
 cd
 wget https://download.01.org/opencv/2019/openvinotoolkit/R3/l_openvino_toolkit_dev_ubuntu18_p_2019.3.376.tgz
 tar -xvzf l_openvino_toolkit_dev_ubuntu18_p_2019.3.376.tgz
 mv ./l_openvino_toolkit_dev_ubuntu18_p_2019.3.376 ./ncsIEsdk
 
-pip install scikit-image #caffe dependences 
-pip install google #caffe dependences 
-pip install protobuff 
-
+#OPEN-CV Installation
 cd
 wget -O opencv.zip https://github.com/opencv/opencv/archive/4.1.1.zip
 wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/4.1.1.zip
@@ -65,10 +70,8 @@ unzip opencv.zip
 unzip opencv_contrib.zip
 mv opencv-4.1.1/ opencv/
 mv opencv_contrib-4.1.1/ opencv_contrib/
-
 cd ~/opencv
 mkdir build && cd build 
-
 cmake -D CMAKE_BUILD_TYPE=RELEASE \
     -D CMAKE_INSTALL_PREFIX=/usr/local \
     -D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib/modules \
@@ -78,17 +81,19 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
     -D OPENCV_ENABLE_NONFREE=ON \
     -D INSTALL_PYTHON_EXAMPLES=OFF \
     -D BUILD_EXAMPLES=OFF ..
-
 make -j4
 sudo make install
 
+#System calls & settings 
+sudo usermod -a -G users "$(whoami)"
+#Move to system path - final compoled kernel 
 cd ~/.virtualenvs/cv/lib/python3.6/site-packages/
 ln -s /usr/local/python/cv2/python-3.6/cv2.cpython-35m-arm-linux-gnueabihf.so cv2.so
 
-cd
+#Tensorflow installation
+cd 
 git clone https://github.com/markjay4k/Tensorflow-1.9rc0-py36-aarch64.git
 pip install Tensorflow-1.9rc0-py36-aarch64/tensorflow-1.9.0rc0-cp36-cp36m-linux_aarch64.whl
-
 cd
 
 
