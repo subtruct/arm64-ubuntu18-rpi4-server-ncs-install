@@ -6,6 +6,7 @@ sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.7 1
 sudo update-alternatives --config python3
 sudo pip -q install virtualenv virtualenvwrapper
 sudo rm -rf ~/get-pip.py ~/.cache/pip
+sudo rm ~/.cache -d -R ./*
 
 # virtualenv and virtualenvwrapper
 export WORKON_HOME=~/.virtualenvs
