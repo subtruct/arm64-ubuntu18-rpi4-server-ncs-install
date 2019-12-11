@@ -1,8 +1,8 @@
 # initialization
 sudo apt -y update && sudo apt -y upgrade
 cd ~
-sudo apt -y install wget mc python python3 python-pip python3-pip python3.7-dev 
-sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.7 1
+sudo apt -y install wget mc python python3 python-pip python3-pip 
+sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 1
 sudo update-alternatives --config python3
 sudo rm -rf ~/get-pip.py ~/.cache/pip
 sudo rm -rf ~/.cache 
@@ -10,22 +10,22 @@ wget https://bootstrap.pypa.io/get-pip.py
 sudo python3 get-pip.py
 
 # virtualenv and virtualenvwrapper
-pip install virtualenv virtualenvwrapper
+pip install virtualenv virtualenvwrapper --user
 export WORKON_HOME=~/.virtualenvs
-export VIRTUALENVWRAPPER_PYTHON=~/cv/lib/python3.7/site-packages
+export VIRTUALENVWRAPPER_PYTHON=~/cv/lib/python3.6/site-packages
+export PATH=$PATH:~/.local/bin:/home/ubuntu/.local/bin:~/.local/lib
 source ~/.local/bin/virtualenvwrapper.sh
 ~/.local/bin/virtualenv cv -p python3
-source cv/bin/activate
+source ~/cv/bin/activate
 
 # virtualenvwrapper
 echo -e "\n# ncs and virtualenvwrapper" >> ~/.bashrc
 echo "export WORKON_HOME=~/.virtualenvs" >> ~/.bashrc
-echo "export VIRTUALENVWRAPPER_PYTHON= ~/.local/lib/python3.7/site-packages" >> ~/.bashrc
-echo "export PATH=PATH:~/.local/bin:~/.local/lib" >> /.local/bin
+echo "export VIRTUALENVWRAPPER_PYTHON= ~/.local/lib/python3.6/site-packages" >> ~/.bashrc
+echo "export PATH=PATH:$PATH:~/.local/bin:/home/ubuntu/.local/bin:~/.local/lib" >> /.local/bin
 echo "alias python=python3" >> ~/.bashrc
 echo "alias pip=pip3" >> ~/.bashrc
-echo "cd ~" >> ~/.bashrc
-echo "source cv/bin/activate" >> ~/.bashrc
+echo "source ~/cv/bin/activate" >> ~/.bashrc
 source ~/.bashrc
 
 #libs & tools
@@ -33,16 +33,13 @@ sudo apt -y install build-essential cmake unzip pkg-config
 sudo apt -y install libjpeg-dev libpng-dev libtiff-dev
 sudo apt -y install libavcodec-dev libavformat-dev libswscale-dev libv4l-dev
 sudo apt -y install libxvidcore-dev libx264-dev
-sudo 
-
--y install libcanberra-gtk*
+sudo spt -y install libcanberra-gtk*
 sudo apt -y install libatlas-base-dev gfortran
 sudo apt -y install libtbb2 libtbb-dev libdc1394-22-dev  libgtk-3-dev 
 
-wget https://bootstrap.pypa.io/get-pip.py
-sudo python3 get-pip.py
 
-pip install numpy
+
+pip install numpy --user
 sudo usermod -a -G users "$(whoami)"
 
 cd ~
@@ -78,10 +75,10 @@ mkdir -p opencv/build
 cd opencv/build
 
 cmake -D CMAKE_INSTALL_PREFIX=~/cv \
-      -D PYTHON3_LIBRARY=~/cv/lib/python3.7/config-3.7m-arm-linux-gnueabihf/libpython3.7m.so \
-      -D PYTHON3_INCLUDE_DIR=/usr/include/python3.7m \
-      -D PYTHON3_PACKAGES_PATH=~/cv/lib/python3.7/dist-packages \
-      -D PYTHON_DEFAULT_EXECUTABLE=~/cv/bin \
+      -D PYTHON3_LIBRARY=/usr/local/lib \
+      -D PYTHON3_INCLUDE_DIR=/usr/include/python3.6m \
+      -D PYTHON3_PACKAGES_PATH=~/cv/lib/python3.6/dist-packages \
+      -D PYTHON_DEFAULT_EXECUTABLE=/usr/local/bin \
       -D BUILD_OPENCV_PYTHON3=yes \
       -D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib/modules \
       -D CMAKE_BUILD_TYPE=Release \
@@ -92,9 +89,9 @@ cmake -D CMAKE_INSTALL_PREFIX=~/cv \
       -D ENABLE_PRECOMPILED_HEADERS=OFF \
       -D ENABLE_NEON=ON \
       -D WITH_INF_ENGINE=ON \
-      -D INF_ENGINE_LIB_DIRS="~/cv/lib" \
-      -D INF_ENGINE_INCLUDE_DIRS="~/cv/include" \
-      -D CMAKE_FIND_ROOT_PATH="~/" \
+      -D INF_ENGINE_LIB_DIRS="/usr/local/lib" \
+      -D INF_ENGINE_INCLUDE_DIRS="/usr/local/include" \
+      -D CMAKE_FIND_ROOT_PATH="/usr/local/" \
       -D ENABLE_CXX11=ON ..
 make -j4
 sudo make install
