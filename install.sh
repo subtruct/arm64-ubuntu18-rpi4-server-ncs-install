@@ -5,7 +5,7 @@ sudo apt -y install wget mc python python3 python-pip python3-pip
 sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 1
 wget https://bootstrap.pypa.io/get-pip.py
 sudo python3 get-pip.py
-sudo pip install virtualenv virtualenvwrapper
+sudo pip3 install virtualenv virtualenvwrapper
 sudo rm -rf ~/get-pip.py ~/.cache/pip
 
 # virtualenv and virtualenvwrapper
@@ -15,6 +15,7 @@ echo "export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3" >> ~/.bashrc
 echo "source /usr/local/bin/virtualenvwrapper.sh" >> ~/.bashrc
 echo "alias python=python3" >> ~/.bashrc
 echo "alias pip=pip3" >> ~/.bashrc
+echo "workon cv" >> ~/.bashrc
 source ~/.bashrc
 mkvirtualenv cv -p python3
 workon cv
@@ -26,17 +27,15 @@ cd ~/cmake-3.14.4
 ./bootstrap
 make –j4
 sudo make install
-
 cd
 #libs & tools
 sudo apt -y install build-essential unzip pkg-config
 sudo apt -y install libjpeg-dev libpng-dev libtiff-dev
 sudo apt -y install libavcodec-dev libavformat-dev libswscale-dev libv4l-dev
 sudo apt -y install libxvidcore-dev libx264-dev
-sudo spt -y install libcanberra-gtk*
+sudo apt -y install libcanberra-gtk*
 sudo apt -y install libatlas-base-dev gfortran
 sudo apt -y install libtbb2 libtbb-dev libdc1394-22-dev  libgtk-3-dev 
-
 cd
 pip install numpy 
 sudo usermod -a -G users "$(whoami)"
@@ -51,8 +50,13 @@ sudo make install
 sudo make api
 
 cd
-git clone https://github.com/markjay4k/Tensorflow-1.9rc0-py36-aarch64.git
-pip install Tensorflow-1.9rc0-py36-aarch64/tensorflow-1.9.0rc0-cp36-cp36m-linux_aarch64.whl
+wget https://download.01.org/opencv/2019/openvinotoolkit/R3/l_openvino_toolkit_dev_ubuntu18_p_2019.3.376.tgz
+tar -xvzf l_openvino_toolkit_dev_ubuntu18_p_2019.3.376.tgz
+mv ./l_openvino_toolkit_dev_ubuntu18_p_2019.3.376 ./ncsIEsdk
+
+pip install scikit-image #caffe dependences 
+pip install google #caffe dependences 
+pip install protobuff 
 
 cd
 wget -O opencv.zip https://github.com/opencv/opencv/archive/4.1.1.zip
@@ -61,10 +65,6 @@ unzip opencv.zip
 unzip opencv_contrib.zip
 mv opencv-4.1.1/ opencv/
 mv opencv_contrib-4.1.1/ opencv_contrib/
-
-cd
-wget https://download.01.org/opencv/2019/openvinotoolkit/R3/l_openvino_toolkit_dev_ubuntu18_p_2019.3.376.tgz
-tar -xvzf l_openvino_toolkit_dev_ubuntu18_p_2019.3.376.tgz
 
 cd ~/opencv
 mkdir build && cd build 
@@ -85,6 +85,10 @@ sudo make install
 cd ~/.virtualenvs/cv/lib/python3.6/site-packages/
 ln -s /usr/local/python/cv2/python-3.6/cv2.cpython-35m-arm-linux-gnueabihf.so cv2.so
 
-cd ~
+cd
+git clone https://github.com/markjay4k/Tensorflow-1.9rc0-py36-aarch64.git
+pip install Tensorflow-1.9rc0-py36-aarch64/tensorflow-1.9.0rc0-cp36-cp36m-linux_aarch64.whl
+
+cd
 
 
