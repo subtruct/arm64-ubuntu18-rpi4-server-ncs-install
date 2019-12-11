@@ -96,6 +96,9 @@ cmake -D CMAKE_INSTALL_PREFIX=/usr/local \
 make -j4
 sudo make install
 
+cd ~
+cd ncsdk-aarch64
+sudo make examples
 
 
 
