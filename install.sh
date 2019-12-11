@@ -40,7 +40,7 @@ sudo usermod -a -G users "$(whoami)"
 
 cd ~
 git clone https://github.com/markjay4k/ncsdk-aarch64.git
-git clone 
+git clone https://github.com/subtruct/arm64-ubuntu18-rpi4-server-ncs-install.git
 sudo cp ~/arm64-ubuntu18-rpi4-server-ncs-install/ncsdk.conf ~/ncsdk-aarch64
 sudo cp ~/arm64-ubuntu18-rpi4-server-ncs-install/ncsdk.conf ~/ncsdk-aarch64/NCSDK-1.12.00.01/ncsdk-aarch64
 cd ncsdk-aarch64
@@ -50,7 +50,7 @@ sudo make api
 
 cd ~
 git clone https://github.com/markjay4k/Tensorflow-1.9rc0-py36-aarch64.git
-sudo pip -q install Tensorflow-1.9rc0-py36-aarch64/tensorflow-1.9.0rc0-cp36-cp36m-linux_aarch64.whl
+pip3 install Tensorflow-1.9rc0-py36-aarch64/tensorflow-1.9.0rc0-cp36-cp36m-linux_aarch64.whl
 
 cd ~
 mkdir ./Downloads
@@ -89,8 +89,10 @@ cmake -D CMAKE_INSTALL_PREFIX=/usr/local \
       -D INF_ENGINE_INCLUDE_DIRS="/usr/local/lib/python3.7/dist-packages/openvino/inference_engine/" \
       -D CMAKE_FIND_ROOT_PATH="/l_openvino_toolkit_dev_ubuntu18_p_2019.3.376/" \
       -D ENABLE_CXX11=ON ..
-#ake -j4
-#udo make install
+make -j4
+sudo make install
+
+
 
 
 
