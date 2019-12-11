@@ -56,6 +56,11 @@ cd ~/ncsdk-aarch64
 sudo make install
 sudo make api
 
+cd /home/pi/.virtualenvs/cv3.3_py3.5/lib/python3.5/site-packages
+ln -s /usr/local/lib/python3.5/dist-packages/mvnc .
+ln -s /usr/local/lib/python3.5/dist-packages/graphviz .
+pip3 install protobuf pyyaml
+
 #Official NCS SDK/API - UBUNTU v.18 build 2019.3.376
 cd
 wget https://download.01.org/opencv/2019/openvinotoolkit/R3/l_openvino_toolkit_dev_ubuntu18_p_2019.3.376.tgz
@@ -63,26 +68,31 @@ tar -xvzf l_openvino_toolkit_dev_ubuntu18_p_2019.3.376.tgz
 mv ./l_openvino_toolkit_dev_ubuntu18_p_2019.3.376 ./ncsIEsdk
 
 #OPEN-CV Installation
-cd
-git clone https://github.com/opencv/opencv.git
-git clone https://github.com/opencv/opencv_contrib.git
-unzip opencv.zip
-unzip opencv_contrib.zip
+#cd
+#git clone https://github.com/opencv/opencv.git
+#git clone https://github.com/opencv/opencv_contrib.git
+#unzip opencv.zip
+#unzip opencv_contrib.zip
 #mv opencv-4.1.1/ opencv/
 #mv opencv_contrib-4.1.1/ opencv_contrib/
-cd ~/opencv
-mkdir build && cd build 
-cmake -D CMAKE_BUILD_TYPE=RELEASE \
-    -D CMAKE_INSTALL_PREFIX=/usr/local \
-    -D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib/modules \
-    -D ENABLE_NEON=ON \
-    -D ENABLE_VFPV3=ON \
-    -D BUILD_TESTS=OFF \
-    -D OPENCV_ENABLE_NONFREE=ON \
-    -D INSTALL_PYTHON_EXAMPLES=OFF \
-    -D BUILD_EXAMPLES=OFF ..
-make -j4
-sudo make install
+#cd ~/opencv
+#mkdir build && cd build 
+#cmake -D CMAKE_BUILD_TYPE=RELEASE \
+#    -D CMAKE_INSTALL_PREFIX=/usr/local \
+#    -D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib/modules \
+#    -D ENABLE_NEON=ON \
+#    -D ENABLE_VFPV3=ON \
+#    -D BUILD_TESTS=OFF \
+#    -D OPENCV_ENABLE_NONFREE=ON \
+#    -D INSTALL_PYTHON_EXAMPLES=ON \
+#    -D BUILD_EXAMPLES=ON \
+#    -D BUILD_opencv_python2=False \
+#    -D BUILD_opencv_python3=True \
+#    -D PYTHON_DEFAULT_EXECUTABLE=python3 \
+#    -D PYTHON_EXECUTABLE=python3 \
+#    -D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib/modules ..
+#make -j4
+#sudo make install
 
 #System calls & settings 
 sudo usermod -a -G users "$(whoami)"
@@ -96,4 +106,4 @@ git clone https://github.com/markjay4k/Tensorflow-1.9rc0-py36-aarch64.git
 pip install Tensorflow-1.9rc0-py36-aarch64/tensorflow-1.9.0rc0-cp36-cp36m-linux_aarch64.whl
 cd
 
-
+make examples
