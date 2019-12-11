@@ -42,7 +42,7 @@ sudo spt -y install libcanberra-gtk*
 sudo apt -y install libatlas-base-dev gfortran
 sudo apt -y install libtbb2 libtbb-dev libdc1394-22-dev  libgtk-3-dev 
 
-~
+cd ~
 pip install numpy 
 sudo usermod -a -G users "$(whoami)"
 
@@ -89,9 +89,10 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
 make -j4
 sudo make install
 
+cd ~/.virtualenvs/cv/lib/python3.6/site-packages/
+ln -s /usr/local/python/cv2/python-3.6/cv2.cpython-35m-arm-linux-gnueabihf.so cv2.so
 cd ~
+
 sudo make examples
-
-
 
 
