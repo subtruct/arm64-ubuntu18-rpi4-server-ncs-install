@@ -12,6 +12,7 @@ sudo rm -rf ~/get-pip.py ~/.cache/pip
 echo -e "\n# ncs and virtualenvwrapper" >> ~/.bashrc
 echo "export WORKON_HOME=~/.virtualenvs" >> ~/.bashrc
 echo "export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3" >> ~/.bashrc
+echo "export OpenCV_DIR=/usr/local/opencv4" >> ~/.bashrc
 echo "source /usr/local/bin/virtualenvwrapper.sh" >> ~/.bashrc
 echo "alias python=python3" >> ~/.bashrc
 echo "alias pip=pip3" >> ~/.bashrc
@@ -20,12 +21,18 @@ source ~/.bashrc
 mkvirtualenv cv
 workon cv
 
+
 #CMake installation ... 
-cd
-wget https://github.com/Kitware/CMake/releases/download/v3.14.4/cmake-3.14.4.tar.gz
-tar xvzf cmake-3.14.4.tar.gz
-cd ~/cmake-3.14.4
-./bootstrap
+#cd
+#wget https://github.com/Kitware/CMake/releases/download/v3.14.4/cmake-3.14.4.tar.gz
+#tar xvzf cmake-3.14.4.tar.gz
+#cd ~/cmake-3.14.4
+#./bootstrap
+git clone https://github.com/opencv/dldt.git
+cd ~/dldt/inference-engine
+git submodule init
+git submodule update --recursive
+
 make –j4
 sudo make install
 
@@ -47,16 +54,16 @@ pip install --user protobuff pyyaml
 pip install --user numpy 
 
 #Custom NCS SDK/API Installation
-cd
-git clone https://github.com/markjay4k/ncsdk-aarch64.git
-git clone https://github.com/subtruct/arm64-ubuntu18-rpi4-server-ncs-install.git
-sudo cp ~/arm64-ubuntu18-rpi4-server-ncs-install/ncsdk.conf ~/ncsdk-aarch64
-sudo cp ~/arm64-ubuntu18-rpi4-server-ncs-install/ncsdk.conf ~/ncsdk-aarch64/NCSDK-1.12.00.01/ncsdk-aarch64
-cd ~/ncsdk-aarch64
-sudo make install
-sudo make api
+#cd
+#git clone https://github.com/markjay4k/ncsdk-aarch64.git
+#git clone https://github.com/subtruct/arm64-ubuntu18-rpi4-server-ncs-install.git
+#udo cp ~/arm64-ubuntu18-rpi4-server-ncs-install/ncsdk.conf ~/ncsdk-aarch64
+#sudo cp ~/arm64-ubuntu18-rpi4-server-ncs-install/ncsdk.conf ~/ncsdk-aarch64/NCSDK-1.12.00.01/ncsdk-aarch64
+#cd ~/ncsdk-aarch64
+#sudo make install
+#sudo make api3##
 
-cd /home/pi/.virtualenvs/cv3.3_py3.5/lib/python3.5/site-packages
+
 ln -s /usr/local/lib/python3.5/dist-packages/mvnc .
 ln -s /usr/local/lib/python3.5/dist-packages/graphviz .
 
@@ -64,9 +71,9 @@ ln -s /usr/local/lib/python3.5/dist-packages/graphviz .
 cd
 wget https://download.01.org/opencv/2019/openvinotoolkit/R3/l_openvino_toolkit_dev_ubuntu18_p_2019.3.376.tgz
 tar -xvzf l_openvino_toolkit_dev_ubuntu18_p_2019.3.376.tgz
-mv ./l_openvino_toolkit_dev_ubuntu18_p_2019.3.376 ./ncsIEsdk
+mv ./l_openvino_toolkit_dev_ubuntu18_p_2019.3.376 ./dldt
 
-OPEN-CV Installation
+#OPEN-CV Installation
 cd
 git clone https://github.com/opencv/opencv.git
 git clone https://github.com/opencv/opencv_contrib.git
@@ -90,7 +97,7 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
     -D PYTHON_DEFAULT_EXECUTABLE=python3 \
     -D PYTHON_EXECUTABLE=python3 \
     -D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib/modules ..
-ake -j4
+make -j4
 sudo make install
 
 #System calls & settings 
@@ -104,5 +111,3 @@ cd
 git clone https://github.com/markjay4k/Tensorflow-1.9rc0-py36-aarch64.git
 pip install Tensorflow-1.9rc0-py36-aarch64/tensorflow-1.9.0rc0-cp36-cp36m-linux_aarch64.whl
 cd
-
-make examples
