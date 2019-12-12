@@ -17,7 +17,7 @@ echo "alias python=python3" >> ~/.bashrc
 echo "alias pip=pip3" >> ~/.bashrc
 echo "workon cv" >> ~/.bashrc
 source ~/.bashrc
-mkvirtualenv cv -p python3
+mkvirtualenv cv
 workon cv
 
 #CMake installation ... 
@@ -41,10 +41,10 @@ sudo apt -y install libatlas-base-dev gfortran
 sudo apt -y install libtbb2 libtbb-dev libdc1394-22-dev  libgtk-3-dev 
 
 #Python main depenzenses 
-pip install scikit-image #caffe dependences 
-pip install google #caffe dependences 
-pip install protobuff 
-pip install numpy 
+pip install --user scikit-image #caffe dependences 
+pip install --user google #caffe dependences 
+pip install --user protobuff pyyaml
+pip install --user numpy 
 
 #Custom NCS SDK/API Installation
 cd
@@ -59,7 +59,6 @@ sudo make api
 cd /home/pi/.virtualenvs/cv3.3_py3.5/lib/python3.5/site-packages
 ln -s /usr/local/lib/python3.5/dist-packages/mvnc .
 ln -s /usr/local/lib/python3.5/dist-packages/graphviz .
-pip3 install protobuf pyyaml
 
 #Official NCS SDK/API - UBUNTU v.18 build 2019.3.376
 cd
