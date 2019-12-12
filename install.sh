@@ -26,8 +26,6 @@ workon cv
 #cd
 #wget https://github.com/Kitware/CMake/releases/download/v3.14.4/cmake-3.14.4.tar.gz
 #tar xvzf cmake-3.14.4.tar.gz
-#cd ~/cmake-3.14.4
-#./bootstrap
 git clone https://github.com/opencv/dldt.git
 cd ~/dldt/inference-engine
 git submodule init
@@ -63,15 +61,20 @@ pip install --user numpy
 #sudo make install
 #sudo make api3##
 
-
-ln -s /usr/local/lib/python3.5/dist-packages/mvnc .
-ln -s /usr/local/lib/python3.5/dist-packages/graphviz .
+ln -s /usr/local/lib/python3.6/dist-packages/mvnc .
+ln -s /usr/local/lib/python3.6/dist-packages/graphviz .
 
 #Official NCS SDK/API - UBUNTU v.18 build 2019.3.376
 cd
 wget https://download.01.org/opencv/2019/openvinotoolkit/R3/l_openvino_toolkit_dev_ubuntu18_p_2019.3.376.tgz
 tar -xvzf l_openvino_toolkit_dev_ubuntu18_p_2019.3.376.tgz
 mv ./l_openvino_toolkit_dev_ubuntu18_p_2019.3.376 ./dldt
+git submodule init
+git submodule update –recursive
+export OpenCV_DIR=/usr/local/opencv 
+cd ~/dldt/inference-engine
+mkdir build && cd build
+
 
 #OPEN-CV Installation
 cd
