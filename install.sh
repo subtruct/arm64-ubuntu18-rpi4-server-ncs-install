@@ -13,7 +13,6 @@ echo -e "\n# NCS and Virtualenvwrapper" >> ~/.bashrc
 echo "export WORKON_HOME=~/.virtualenvs" >> ~/.bashrc
 echo "export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3" >> ~/.bashrc
 echo "export OpenCV_DIR=/usr/local/opencv4" >> ~/.bashrc
-echo "export PYTHONPATH=$PYTHONPATH:/usr/local/lib/python3.6/site-packages" >> ~/.bashrc
 echo "source /usr/local/bin/virtualenvwrapper.sh" >> ~/.bashrc
 echo "alias python=python3" >> ~/.bashrc
 echo "alias pip=pip3" >> ~/.bashrc
@@ -79,22 +78,17 @@ sudo make install
 #--NCS SDK/API on Ubuntu18.1. Build.2019.3.376
 cd && wget https://download.01.org/opencv/2019/openvinotoolkit/R3/l_openvino_toolkit_dev_ubuntu18_p_2019.3.376.tgz
 tar -xvzf l_openvino_toolkit_dev_ubuntu18_p_2019.3.376.tgz
-
 mv ./l_openvino_toolkit_dev_ubuntu18_p_2019.3.376 ./dldt
 git submodule init
 git submodule update --recursive
 ln -s /usr/local/lib/python3.6/dist-packages/mvnc .
 ln -s /usr/local/lib/python3.6/dist-packages/graphviz .
 
-#--System calls & settings 
-cd ~/.virtualenvs/cv/lib/python3.6/site-packages/
-
 #-- Link to source files  
 cd ~/.virtualenvs/cv/lib/python3.6/site-packages/
-ln -s /usr/local/python/cv2/python-3.6/cv2.cpython-36m-arm-linux-gnueabihf.so cv2.so
+sudo rm cv2.so
+sudo ln -s /usr/local/lib/python3.6/site-packages/cv2.cpython-32mu.so cv2.so
 
 #--Tensorflow silent installation
 cd && git clone https://github.com/markjay4k/Tensorflow-1.9rc0-py36-aarch64.git
 install Tensorflow-1.9rc0-py36-aarch64/tensorflow-1.9.0rc0-cp36-cp36m-linux_aarch64.whl
-
-cd && nano ./dldt/bin/
