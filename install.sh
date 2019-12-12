@@ -67,32 +67,32 @@ wget https://download.01.org/opencv/2019/openvinotoolkit/R3/l_openvino_toolkit_d
 tar -xvzf l_openvino_toolkit_dev_ubuntu18_p_2019.3.376.tgz
 mv ./l_openvino_toolkit_dev_ubuntu18_p_2019.3.376 ./ncsIEsdk
 
-#OPEN-CV Installation
-#cd
-#git clone https://github.com/opencv/opencv.git
-#git clone https://github.com/opencv/opencv_contrib.git
-#unzip opencv.zip
-#unzip opencv_contrib.zip
-#mv opencv-4.1.1/ opencv/
-#mv opencv_contrib-4.1.1/ opencv_contrib/
-#cd ~/opencv
-#mkdir build && cd build 
-#cmake -D CMAKE_BUILD_TYPE=RELEASE \
-#    -D CMAKE_INSTALL_PREFIX=/usr/local \
-#    -D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib/modules \
-#    -D ENABLE_NEON=ON \
-#    -D ENABLE_VFPV3=ON \
-#    -D BUILD_TESTS=OFF \
-#    -D OPENCV_ENABLE_NONFREE=ON \
-#    -D INSTALL_PYTHON_EXAMPLES=ON \
-#    -D BUILD_EXAMPLES=ON \
-#    -D BUILD_opencv_python2=False \
-#    -D BUILD_opencv_python3=True \
-#    -D PYTHON_DEFAULT_EXECUTABLE=python3 \
-#    -D PYTHON_EXECUTABLE=python3 \
-#    -D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib/modules ..
-#make -j4
-#sudo make install
+OPEN-CV Installation
+cd
+git clone https://github.com/opencv/opencv.git
+git clone https://github.com/opencv/opencv_contrib.git
+unzip opencv.zip
+unzip opencv_contrib.zip
+mv opencv-4.1.1/ opencv/
+mv opencv_contrib-4.1.1/ opencv_contrib/
+cd ~/opencv
+mkdir build && cd build 
+cmake -D CMAKE_BUILD_TYPE=RELEASE \
+    -D CMAKE_INSTALL_PREFIX=/usr/local \
+    -D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib/modules \
+    -D ENABLE_NEON=ON \
+    -D ENABLE_VFPV3=ON \
+    -D BUILD_TESTS=OFF \
+   -D OPENCV_ENABLE_NONFREE=ON \
+    -D INSTALL_PYTHON_EXAMPLES=ON \
+    -D BUILD_EXAMPLES=ON \
+    -D BUILD_opencv_python2=False \
+    -D BUILD_opencv_python3=True \
+    -D PYTHON_DEFAULT_EXECUTABLE=python3 \
+    -D PYTHON_EXECUTABLE=python3 \
+    -D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib/modules ..
+ake -j4
+sudo make install
 
 #System calls & settings 
 sudo usermod -a -G users "$(whoami)"
