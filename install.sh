@@ -30,6 +30,11 @@ sudo apt -y install libcanberra-gtk*
 sudo apt -y install libatlas-base-dev gfortran
 sudo apt -y install libtbb2 libtbb-dev libdc1394-22-dev  libgtk-3-dev 
 
+#-- Pip3 depenzenses libs & tools & settings
+sudo pip3 install numpy && pip3 install scikit-image 
+pip3 install google #caffe dependences 
+pip3 install protobuff pyyaml
+
 #CMake installation ... 
 #-- wget https://github.com/Kitware/CMake/releases/download/v3.14.4/cmake-3.14.4.tar.gz //we will get from off sorce 
 #-- tar xvzf cmake-3.14.4.tar.gz #will be last new version 
@@ -40,11 +45,6 @@ cd ~/dldt/inference-engine
 mkdir build && cd build
 make –j4
 sudo make install
-
-#-- Pip3 depenzenses libs & tools & settings
-sudo pip3 install numpy && pip3 install scikit-image 
-pip3 install google #caffe dependences 
-pip3 install protobuff pyyaml
 
 #Custom NCS SDK/API Installation
 #cd && one https://github.com/markjay4k/ncsdk-aarch64.git
@@ -79,16 +79,17 @@ sudo make install
 #--NCS SDK/API on Ubuntu18.1. Build.2019.3.376
 cd && wget https://download.01.org/opencv/2019/openvinotoolkit/R3/l_openvino_toolkit_dev_ubuntu18_p_2019.3.376.tgz
 tar -xvzf l_openvino_toolkit_dev_ubuntu18_p_2019.3.376.tgz
+
 mv ./l_openvino_toolkit_dev_ubuntu18_p_2019.3.376 ./dldt
-cd ./dldt/bin/
-source ./set
 git submodule init
 git submodule update --recursive
 ln -s /usr/local/lib/python3.6/dist-packages/mvnc .
 ln -s /usr/local/lib/python3.6/dist-packages/graphviz .
 
 #--System calls & settings 
-#Move to system path - final compoled kernel 
+cd ~/.virtualenvs/cv/lib/python3.6/site-packages/
+
+#-- Link to source files  
 cd ~/.virtualenvs/cv/lib/python3.6/site-packages/
 ln -s /usr/local/python/cv2/python-3.6/cv2.cpython-36m-arm-linux-gnueabihf.so cv2.so
 
