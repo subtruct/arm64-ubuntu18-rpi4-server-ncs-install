@@ -29,9 +29,9 @@ sudo apt -y install libatlas-base-dev gfortran
 sudo apt -y install libtbb2 libtbb-dev libdc1394-22-dev  libgtk-3-dev 
 
 #-- Pip3 depenzenses libs & tools & settings
-sudo pip3 install numpy && pip3 install scikit-image 
-pip3 install google #caffe dependences 
-pip3 install protobuff pyyaml
+sudo pip3 install numpy && sudo pip3 install scikit-image 
+sudo pip3 install google #caffe dependences 
+sudo pip3 install protobuff pyyaml
 
 #CMake installation ... 
 #-- wget https://github.com/Kitware/CMake/releases/download/v3.14.4/cmake-3.14.4.tar.gz //we will get from off sorce 
@@ -90,4 +90,5 @@ sudo ln -s /usr/local/lib/python3.6/site-packages/cv2.cpython-32mu.so cv2.so
 
 #--Tensorflow silent installation
 cd && git clone https://github.com/markjay4k/Tensorflow-1.9rc0-py36-aarch64.git
-install Tensorflow-1.9rc0-py36-aarch64/tensorflow-1.9.0rc0-cp36-cp36m-linux_aarch64.whl
+sudo apt install Tensorflow-1.9rc0-py36-aarch64/tensorflow-1.9.0rc0-cp36-cp36m-linux_aarch64.whl
+sudo reboot 
