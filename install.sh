@@ -21,15 +21,15 @@ source ~/.bashrc
 mkvirtualenv cv
 workon cv
 
-
 #CMake installation ... 
 #cd
-#wget https://github.com/Kitware/CMake/releases/download/v3.14.4/cmake-3.14.4.tar.gz
-#tar xvzf cmake-3.14.4.tar.gz
+#wget https://github.com/Kitware/CMake/releases/download/v3.14.4/cmake-3.14.4.tar.gz //we will get from off sorce 
+#tar xvzf cmake-3.14.4.tar.gz #will be last new version 
 git clone https://github.com/opencv/dldt.git
-cd ~/dldt/inference-engine
 git submodule init
 git submodule update --recursive
+cd ~/dldt/inference-engine
+mkdir build && cd build
 
 make –j4
 sudo make install
@@ -72,8 +72,7 @@ mv ./l_openvino_toolkit_dev_ubuntu18_p_2019.3.376 ./dldt
 git submodule init
 git submodule update –recursive
 export OpenCV_DIR=/usr/local/opencv 
-cd ~/dldt/inference-engine
-mkdir build && cd build
+
 
 
 #OPEN-CV Installation
@@ -114,3 +113,5 @@ cd
 git clone https://github.com/markjay4k/Tensorflow-1.9rc0-py36-aarch64.git
 pip install Tensorflow-1.9rc0-py36-aarch64/tensorflow-1.9.0rc0-cp36-cp36m-linux_aarch64.whl
 cd
+
+export OpenCV_DIR=/usr/local/opencv4
