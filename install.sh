@@ -2,10 +2,11 @@
 # initialization
 cd && sudo apt -y update && sudo apt -y upgrade && sudo apt-get dist-upgrade
 sudo apt -y install wget mc wget git python python3 python-pip python3-pip python3.6-dev
+#if any trouble use...
+#sudo python3 -m pip uninstall pip && sudo apt install python3-pip --reinstall 
 sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 1
-wget https://bootstrap.pypa.io/get-pip.py
-python3 get-pip.py --user
-echo "export PATH=$PATH:/home/ubuntu/.local/bin" >> ~/.bashrc
+#wget https://bootstrap.pypa.io/get-pip.py
+#sudo python3 get-pip.py --user
 #pip3 install virtualenv virtualenvwrapper
 
 # BASHRC
@@ -16,6 +17,7 @@ echo -e "\n# virtualenv and virtualenvwrapper" >> ~/.bashrc
 #echo "export OpenCV_DIR=/usr/local/opencv4" >> ~/.bashrc
 #echo "export PATH=/home/ubuntu/.local/bin:/home/ubuntu/.virtualenvs/cv/bin"
 #echo "source $WORKON_HOME/cv/bin/activate" >> ~/.bashrc
+echo "export PATH=$PATH:/home/ubuntu/.local/bin" >> ~/.bashrc
 echo "alias python=python3.6" >> ~/.bashrc
 echo "alias pip=pip3" >> ~/.bashrc
 source ~/.bashrc
@@ -30,9 +32,10 @@ sudo apt -y install libatlas-base-dev gfortran
 sudo apt -y install libtbb2 libtbb-dev libdc1394-22-dev  libgtk-3-dev 
 
 #-- Pip3 depenzenses libs & tools & settings
-sudo pip3 install numpy && sudo pip3 install scikit-image 
-sudo pip3 install google #caffe dependences 
-sudo pip3 install protobuff pyyaml
+pip3 install numpy --user
+pip3 install scikit-image --user
+pip3 install google --user #caffe dependences 
+pip3 install protobuff pyyaml --user
 
 #Custom NCS SDK/API Installation
 #cd && one https://github.com/markjay4k/ncsdk-aarch64.git
