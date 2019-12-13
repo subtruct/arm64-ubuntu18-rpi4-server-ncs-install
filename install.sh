@@ -60,8 +60,14 @@ ln -s /usr/local/lib/python3.6/dist-packages/graphviz .
 
 
 #--OPEN-CV Installation
-cd && git clone https://github.com/opencv/opencv.git
-git clone https://github.com/opencv/opencv_contrib.git
+#cd && git clone https://github.com/opencv/opencv.git
+#git clone https://github.com/opencv/opencv_contrib.git
+wget -O opencv.zip https://github.com/opencv/opencv/archive/4.1.1.zip
+wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/4.1.1.zip
+unzip opencv.zip
+unzip opencv_contrib.zip
+mv opencv-4.1.1/ opencv/
+mv opencv_contrib-4.1.1/ opencv_contrib/
 cd ~/opencv
 mkdir build && cd build 
 cmake -D CMAKE_INSTALL_PREFIX=/usr/local \
