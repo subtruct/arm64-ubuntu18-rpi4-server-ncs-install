@@ -43,6 +43,13 @@ sudo pip3 install protobuff pyyaml
 #sudo make install
 #sudo make api3##
 
+wget https://github.com/Kitware/CMake/releases/download/v3.14.4/cmake-3.14.4.tar.gz
+tar xvzf cmake-3.14.4.tar.gz
+cd ~/cmake-3.14.4
+./bootstrap
+make –j4
+make install
+
 #--NCS SDK/API on Ubuntu18.1. Build.2019.3.376
 #cd && wget https://download.01.org/opencv/2019/openvinotoolkit/R3/l_openvino_toolkit_dev_ubuntu18_p_2019.3.376.tgz
 #tar -xvzf l_openvino_toolkit_dev_ubuntu18_p_2019.3.376.tgz
@@ -53,16 +60,17 @@ mv ./l_openvino_toolkit_runtime_ubuntu18_p_2019.3.376 ./dldt
 cd ~/dldt/inference-engine
 git submodule init
 git submodule update --recursive
+sh ./install_dependencies.sh
 mkdir build && cd build
 cmake -DCMAKE_BUILD_TYPE=Release -DENABLE_MKL_DNN=OFF -DENABLE_CLDNN -DENABLE_GNA=OFF -DENABLE_SSE42=OFF -DTHREADING=SEQ ..
 make –j4
 sudo make install
-ln -s /usr/local/lib/python3.6/dist-packages/mvnc .
-ln -s /usr/local/lib/python3.6/dist-packages/graphviz .
+sudo ln -s /usr/local/lib/python3.6/dist-packages/mvnc .
+sudo ln -s /usr/local/lib/python3.6/dist-packages/graphviz .
 sudo cp -R ~/dldt/python/python3.7/* /usr/local/lib/python3.6/dist-packages/
 sudo cp -R ~/dldt/deployment_tools/inference_engine/lib/armv7l/* /usr/local/lib/python3.6/dist-packages/openvino/inference_engine/
 cd && source ~/dldt/bin/setupvars.sh
-sh ~/dldt/install_dependencies/install_NCS_udev_rules.sh
+sudo sh ~/dldt/install_dependencies/install_NCS_udev_rules.sh
 echo "source ~/dldt/bin/setupvars.sh" >> ~/.bashrc
 sudo usermod -a -G users "$(whoami)"
 
