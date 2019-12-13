@@ -1,7 +1,7 @@
 #!/bin/bash -x
 # initialization
 cd && sudo apt -y update && sudo apt -y upgrade && sudo apt-get dist-upgrade
-sudo apt -y install wget mc python python3 python-pip python3-pip python3.6-dev
+sudo apt -y install wget mc wget git python python3 python-pip python3-pip python3.6-dev
 sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 1
 wget https://bootstrap.pypa.io/get-pip.py
 python3 get-pip.py
