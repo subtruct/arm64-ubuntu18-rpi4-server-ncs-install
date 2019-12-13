@@ -7,9 +7,10 @@ wget https://bootstrap.pypa.io/get-pip.py
 python3 get-pip.py --user
 echo "export PATH=$PATH:/home/ubuntu/.local/bin" >> ~/.bashrc
 #pip3 install virtualenv virtualenvwrapper
-# virtualenv and virtualenvwrapper
+
+# BASHRC
+echo -e "\n# virtualenv and virtualenvwrapper" >> ~/.bashrc
 #echo "source /usr/local/bin/virtualenvwrapper.sh" >> ~/.bashrc
-#echo -e "\n# virtualenv and virtualenvwrapper" >> ~/.bashrc
 #echo "export WORKON_HOME=$HOME/.venvs" >> ~/.bashrc
 #echo "export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3.6" >> ~/.bashrc
 #echo "export OpenCV_DIR=/usr/local/opencv4" >> ~/.bashrc
