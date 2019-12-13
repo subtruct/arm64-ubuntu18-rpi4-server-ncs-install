@@ -51,7 +51,7 @@ tar xvzf cmake-3.14.4.tar.gz
 cd ~/cmake-3.14.4
 ./bootstrap
 make –j4
-make install
+sudo make install
 
 #--NCS SDK/API on Ubuntu18.1. Build.2019.3.376
 #cd && wget https://download.01.org/opencv/2019/openvinotoolkit/R3/l_openvino_toolkit_dev_ubuntu18_p_2019.3.376.tgz
