@@ -57,11 +57,14 @@ make –j4
 sudo make install
 ln -s /usr/local/lib/python3.6/dist-packages/mvnc .
 ln -s /usr/local/lib/python3.6/dist-packages/graphviz .
-
+sudo cp -R ~/dldt/python/python3.7/* /usr/local/lib/python3.6/dist-packages/
+sudo cp -R ~/dldt/deployment_tools/inference_engine/lib/armv7l/* /usr/local/lib/python3.6/dist-packages/openvino/inference_engine/
+cd && source ~/dldt/bin/setupvars.sh
+sh ~/dldt/install_dependencies/install_NCS_udev_rules.sh
+echo "source ~/dldt/bin/setupvars.sh" >> ~/.bashrc
+sudo usermod -a -G users "$(whoami)"
 
 #--OPEN-CV Installation
-#cd && git clone https://github.com/opencv/opencv.git
-#git clone https://github.com/opencv/opencv_contrib.git
 wget -O opencv.zip https://github.com/opencv/opencv/archive/4.1.1.zip
 wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/4.1.1.zip
 unzip opencv.zip
@@ -92,10 +95,7 @@ cmake -D CMAKE_INSTALL_PREFIX=/usr/local \
 make -j4
 sudo make install
 
-sudo usermod -a -G users "$(whoami)"
 
-#cd && source ./dldt/bin/setupvars.sh
-#sh ./dldt/install_dependencies/install_NCS_udev_rules.sh
 
 
 #-- Link to source files  
