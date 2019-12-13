@@ -1,22 +1,21 @@
+#!/bin/bash -x
 # initialization
-cd && sudo apt -y update && sudo apt -y upgrade
-sudo apt -y install wget mc python python3 python-pip python3-pip python3-dev
+cd && sudo apt -y update && sudo apt -y upgrade && sudo apt-get dist-upgrade
+sudo apt -y install wget mc python python3 python-pip python3-pip python3.6-dev
 sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 1
 wget https://bootstrap.pypa.io/get-pip.py
 python3 get-pip.py
 pip3 install virtualenv virtualenvwrapper
-sudo rm -rf ~/get-pip.py ~/.cache/pip
-mkvirtualenv cv
-
 # virtualenv and virtualenvwrapper
-echo -e "\n# NCS and Virtualenvwrapper" >> ~/.bashrc
-echo "export WORKON_HOME=~/.virtualenvs" >> ~/.bashrc
-echo "export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3" >> ~/.bashrc
-echo "export OpenCV_DIR=/usr/local/opencv4" >> ~/.bashrc
 echo "source /usr/local/bin/virtualenvwrapper.sh" >> ~/.bashrc
-echo "alias python=python3" >> ~/.bashrc
+echo -e "\n# virtualenv and virtualenvwrapper" >> ~/.bashrc
+echo "export WORKON_HOME=$HOME/.venvs" >> ~/.bashrc
+echo "export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3.6" >> ~/.bashrc
+#echo "export OpenCV_DIR=/usr/local/opencv4" >> ~/.bashrc
+echo "export PATH=/home/ubuntu/.local/bin:/home/ubuntu/.virtualenvs/cv/bin"
+echo "source $WORKON_HOME/cv/bin/activate" >> ~/.bashrc
+echo "alias python=python3.6" >> ~/.bashrc
 echo "alias pip=pip3" >> ~/.bashrc
-echo "workon cv" >> ~/.bashrc
 source ~/.bashrc
 
 #System lib&tools
@@ -33,16 +32,7 @@ sudo pip3 install numpy && sudo pip3 install scikit-image
 sudo pip3 install google #caffe dependences 
 sudo pip3 install protobuff pyyaml
 
-#CMake installation ... 
-#-- wget https://github.com/Kitware/CMake/releases/download/v3.14.4/cmake-3.14.4.tar.gz //we will get from off sorce 
-#-- tar xvzf cmake-3.14.4.tar.gz #will be last new version 
-cd && git clone https://github.com/opencv/dldt.git
-git submodule init
-git submodule update --recursive
-cd ~/dldt/inference-engine
-mkdir build && cd build
-make –j4
-sudo make install
+
 
 #Custom NCS SDK/API Installation
 #cd && one https://github.com/markjay4k/ncsdk-aarch64.git
@@ -75,17 +65,29 @@ make -j4
 sudo make install
 
 #--NCS SDK/API on Ubuntu18.1. Build.2019.3.376
-cd && wget https://download.01.org/opencv/2019/openvinotoolkit/R3/l_openvino_toolkit_dev_ubuntu18_p_2019.3.376.tgz
-tar -xvzf l_openvino_toolkit_dev_ubuntu18_p_2019.3.376.tgz
-mv ./l_openvino_toolkit_dev_ubuntu18_p_2019.3.376 ./dldt
+#cd && wget https://download.01.org/opencv/2019/openvinotoolkit/R3/l_openvino_toolkit_dev_ubuntu18_p_2019.3.376.tgz
+#tar -xvzf l_openvino_toolkit_dev_ubuntu18_p_2019.3.376.tgz
+
+#mv ./l_openvino_toolkit_dev_ubuntu18_p_2019.3.376 ./dldt
+cd ~/dldt/inference-engine
 git submodule init
 git submodule update --recursive
+mkdir build && cd build
+cmake -DCMAKE_BUILD_TYPE=Release -DENABLE_MKL_DNN=OFF -DENABLE_CLDNN -DENABLE_GNA=OFF -DENABLE_SSE42=OFF -DTHREADING=SEQ ..
+make –j4
+sudo make install
 ln -s /usr/local/lib/python3.6/dist-packages/mvnc .
 ln -s /usr/local/lib/python3.6/dist-packages/graphviz .
 
+sudo usermod -a -G users "$(whoami)"
+
+cd && source ./dldt/bin/setupvars.sh
+sh ./dldt/install_dependencies/install_NCS_udev_rules.sh
+
+
 #-- Link to source files  
 cd ~/.virtualenvs/cv/lib/python3.6/site-packages/
-sudo rm cv2.so
+sudo mv cv2.so cv2.so.bak
 sudo ln -s /usr/local/lib/python3.6/site-packages/cv2.cpython-32mu.so cv2.so
 
 #--Tensorflow silent installation
