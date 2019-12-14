@@ -35,7 +35,7 @@ sudo apt -y install libtbb2 libtbb-dev libdc1394-22-dev  libgtk-3-dev
 pip3 install numpy --user
 pip3 install scikit-image --user
 pip3 install google --user #caffe dependences 
-pip3 install protobuff pyyaml --user
+pip3 install protobuf pyyaml --user
 
 #Custom NCS SDK/API Installation
 #cd && one https://github.com/markjay4k/ncsdk-aarch64.git
