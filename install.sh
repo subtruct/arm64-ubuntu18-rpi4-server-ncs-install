@@ -41,22 +41,25 @@ cd && wget https://github.com/Kitware/CMake/releases/download/v3.14.4/cmake-3.14
 tar xvzf cmake-3.14.4.tar.gz
 cd ~/cmake-3.14.4
 ./bootstrap
+make clean
 make –j4
 sudo make install
 
 #--NCS SDK/API on Ubuntu18.1. Build.2019.3.376
 #cd && wget https://download.01.org/opencv/2019/openvinotoolkit/R3/l_openvino_toolkit_dev_ubuntu18_p_2019.3.376.tgz
 #tar -xvzf l_openvino_toolkit_dev_ubuntu18_p_2019.3.376.tgz
-cd && wget https://download.01.org/opencv/2019/openvinotoolkit/R3/l_openvino_toolkit_runtime_ubuntu18_p_2019.3.376.tgz
+cd 
+wget https://download.01.org/opencv/2019/openvinotoolkit/R3/l_openvino_toolkit_runtime_ubuntu18_p_2019.3.376.tgz
 tar -xf l_openvino_toolkit_runtime_ubuntu18_p_2019.3.376.tgz
 #sudo cp -R ./l_openvino_toolkit_runtime_raspbian_p_2019.2.242 /srv/chroot/buster_armhf/
-mv ./l_openvino_toolkit_runtime_ubuntu18_p_2019.3.376 ./dldt
+cp ~/l_openvino_toolkit_runtime_ubuntu18_p_2019.3.376 ~/dldt -r
 cd ~/dldt/inference-engine
 git submodule init
 git submodule update --recursive
 sh ./install_dependencies.sh
 mkdir build && cd build
 cmake -DCMAKE_BUILD_TYPE=Release -DENABLE_MKL_DNN=OFF -DENABLE_CLDNN -DENABLE_GNA=OFF -DENABLE_SSE42=OFF -DTHREADING=SEQ ..
+make clean
 make –j4
 sudo make install
 sudo ln -s /usr/local/lib/python3.6/dist-packages/mvnc .
@@ -97,6 +100,7 @@ cmake -D CMAKE_INSTALL_PREFIX=/usr/local \
       -D INF_ENGINE_INCLUDE_DIRS="~/dldt/deployment_tools/inference_engine/include" \
       -D CMAKE_FIND_ROOT_PATH="~/dldt/" \
       -D ENABLE_CXX11=ON ..
+make clean
 make -j4
 sudo make install
 
