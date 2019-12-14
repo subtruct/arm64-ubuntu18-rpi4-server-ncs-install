@@ -37,7 +37,7 @@ pip3 install protobuf pyyaml --user
 #sudo make install
 #sudo make api3##
 
-wget https://github.com/Kitware/CMake/releases/download/v3.14.4/cmake-3.14.4.tar.gz
+cd && wget https://github.com/Kitware/CMake/releases/download/v3.14.4/cmake-3.14.4.tar.gz
 tar xvzf cmake-3.14.4.tar.gz
 cd ~/cmake-3.14.4
 ./bootstrap
@@ -69,6 +69,7 @@ echo "source ~/dldt/bin/setupvars.sh" >> ~/.bashrc
 sudo usermod -a -G users "$(whoami)"
 
 #--OPEN-CV Installation
+cd
 wget -O opencv.zip https://github.com/opencv/opencv/archive/4.1.1.zip
 wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/4.1.1.zip
 unzip opencv.zip
