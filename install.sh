@@ -8,19 +8,10 @@ sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 1
 #wget https://bootstrap.pypa.io/get-pip.py
 #sudo python3 get-pip.py --user
 #pip3 install virtualenv virtualenvwrapper
-
-# BASHRC
-echo -e "\n# virtualenv and virtualenvwrapper" >> ~/.bashrc
-#echo "source /usr/local/bin/virtualenvwrapper.sh" >> ~/.bashrc
-#echo "export WORKON_HOME=$HOME/.venvs" >> ~/.bashrc
-#echo "export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3.6" >> ~/.bashrc
-#echo "export OpenCV_DIR=/usr/local/opencv4" >> ~/.bashrc
-#echo "export PATH=/home/ubuntu/.local/bin:/home/ubuntu/.virtualenvs/cv/bin"
-#echo "source $WORKON_HOME/cv/bin/activate" >> ~/.bashrc
-echo "export PATH=$PATH:/home/ubuntu/.local/bin" >> ~/.bashrc
-echo "alias python=python3.6" >> ~/.bashrc
-echo "alias pip=pip3" >> ~/.bashrc
-source ~/.bashrc
+export OpenCV_DIR=/usr/local/opencv4
+export PATH=$PATH:/home/ubuntu/.local/bin
+alias python=python3.6
+alias pip=pip3
 
 #System lib&tools
 cd && sudo apt -y install build-essential unzip pkg-config
@@ -108,7 +99,18 @@ cmake -D CMAKE_INSTALL_PREFIX=/usr/local \
 make -j4
 sudo make install
 
-
+# BASHRC
+echo -e "\n# virtualenv and virtualenvwrapper" >> ~/.bashrc
+#echo "source /usr/local/bin/virtualenvwrapper.sh" >> ~/.bashrc
+#echo "export WORKON_HOME=$HOME/.venvs" >> ~/.bashrc
+#echo "export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3.6" >> ~/.bashrc
+#echo "export OpenCV_DIR=/usr/local/opencv4" >> ~/.bashrc
+#echo "export PATH=/home/ubuntu/.local/bin:/home/ubuntu/.virtualenvs/cv/bin"
+#echo "source $WORKON_HOME/cv/bin/activate" >> ~/.bashrc
+echo "export PATH=$PATH:/home/ubuntu/.local/bin" >> ~/.bashrc
+echo "alias python=python3.6" >> ~/.bashrc
+echo "alias pip=pip3" >> ~/.bashrc
+source ~/.bashrc
 
 
 #-- Link to source files  
