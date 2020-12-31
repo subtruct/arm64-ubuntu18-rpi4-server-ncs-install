@@ -10,7 +10,7 @@ sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 1
 #pip3 install virtualenv virtualenvwrapper
 export OpenCV_DIR=/usr/local/opencv4
 export PATH=$PATH:/home/ubuntu/.local/bin
-alias python=python3.6
+alias python=python3.7
 alias pip=pip3
 
 #System lib&tools
