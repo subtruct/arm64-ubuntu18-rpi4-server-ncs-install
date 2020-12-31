@@ -98,8 +98,7 @@ cmake -D CMAKE_INSTALL_PREFIX=/usr/local \
       -D WITH_INF_ENGINE=ON \
       -D INF_ENGINE_LIB_DIRS="~/dldt/deployment_tools/inference_engine/lib/intel64" \
       -D INF_ENGINE_INCLUDE_DIRS="~/dldt/deployment_tools/inference_engine/include" \
-      -D CMAKE_FIND_ROOT_PATH="~/dldt/" \
-      -D ENABLE_CXX11=ON ..
+      -D CMAKE_FIND_ROOT_PATH="~/dldt/" .. 
 make clean
 make -j4
 sudo make install
