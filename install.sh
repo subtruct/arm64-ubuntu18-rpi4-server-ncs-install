@@ -62,10 +62,10 @@ cmake -DCMAKE_BUILD_TYPE=Release -DENABLE_MKL_DNN=OFF -DENABLE_CLDNN -DENABLE_GN
 make clean
 make –j4
 sudo make install
-sudo ln -s /usr/local/lib/python3.6/dist-packages/mvnc .
-sudo ln -s /usr/local/lib/python3.6/dist-packages/graphviz .
-sudo cp -R ~/dldt/python/python3.7/* /usr/local/lib/python3.6/dist-packages/
-sudo cp -R ~/dldt/deployment_tools/inference_engine/lib/armv7l/* /usr/local/lib/python3.6/dist-packages/openvino/inference_engine/
+sudo ln -s /usr/local/lib/python3.7/dist-packages/mvnc .
+sudo ln -s /usr/local/lib/python3.7/dist-packages/graphviz .
+sudo cp -R ~/dldt/python/python3.7/* /usr/local/lib/python3.7/dist-packages/
+sudo cp -R ~/dldt/deployment_tools/inference_engine/lib/intel64/* /usr/local/lib/python3.7/dist-packages/openvino/inference_engine/
 cd && source ~/dldt/bin/setupvars.sh
 sudo sh ~/dldt/install_dependencies/install_NCS_udev_rules.sh
 echo "source ~/dldt/bin/setupvars.sh" >> ~/.bashrc
@@ -82,10 +82,10 @@ mv opencv_contrib-4.1.1/ opencv_contrib/
 cd ~/opencv
 mkdir build && cd build 
 cmake -D CMAKE_INSTALL_PREFIX=/usr/local \
-      -D PYTHON3_EXECUTABLE=/usr/bin/python3.6 \
-      -D PYTHON3_INCLUDE_DIR=/usr/include/python3.6m \
-      -D PYTHON3_PACKAGES_PATH=/usr/lib/python3.6/dist-packages \
-      -D PYTHON_DEFAULT_EXECUTABLE=/usr/bin/python3.6 \
+      -D PYTHON3_EXECUTABLE=/usr/bin/python3.7 \
+      -D PYTHON3_INCLUDE_DIR=/usr/include/python3.7m \
+      -D PYTHON3_PACKAGES_PATH=/usr/lib/python3.7/dist-packages \
+      -D PYTHON_DEFAULT_EXECUTABLE=/usr/bin/python3.7 \
       -D BUILD_OPENCV_PYTHON3=yes \
       -D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib/modules \
       -D CMAKE_BUILD_TYPE=Release \
@@ -96,7 +96,7 @@ cmake -D CMAKE_INSTALL_PREFIX=/usr/local \
       -D ENABLE_PRECOMPILED_HEADERS=OFF \
       -D ENABLE_NEON=ON \
       -D WITH_INF_ENGINE=ON \
-      -D INF_ENGINE_LIB_DIRS="~/dldt/deployment_tools/inference_engine/lib/armv7l" \
+      -D INF_ENGINE_LIB_DIRS="~/dldt/deployment_tools/inference_engine/lib/intel64" \
       -D INF_ENGINE_INCLUDE_DIRS="~/dldt/deployment_tools/inference_engine/include" \
       -D CMAKE_FIND_ROOT_PATH="~/dldt/" \
       -D ENABLE_CXX11=ON ..
