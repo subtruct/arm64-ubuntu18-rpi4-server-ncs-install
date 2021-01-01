@@ -23,10 +23,11 @@ sudo apt -y install libatlas-base-dev gfortran
 sudo apt -y install libtbb2 libtbb-dev libdc1394-22-dev  libgtk-3-dev 
 
 #-- Pip3 depenzenses libs & tools & settings
-pip3 install numpy --user
-pip3 install scikit-image --user
-pip3 install google --user #caffe dependences 
-pip3 install protobuf pyyaml --user
+pip3 install pillow --upgrade
+pip3 install numpy
+pip3 install scikit-image
+pip3 install google #caffe dependences 
+pip3 install protobuf pyyaml 
 
 #Custom NCS SDK/API Installation
 #cd && one https://github.com/markjay4k/ncsdk-aarch64.git
