@@ -4,7 +4,7 @@ cd && sudo apt -y update && sudo apt -y upgrade && sudo apt-get dist-upgrade
 sudo apt -y install wget mc wget git python python3 python-pip python3-pip python3.6-dev
 #if any trouble use...
 #sudo python3 -m pip uninstall pip && sudo apt install python3-pip --reinstall 
-sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 1
+sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.7 1
 #wget https://bootstrap.pypa.io/get-pip.py
 #sudo python3 get-pip.py --user
 #pip3 install virtualenv virtualenvwrapper
@@ -49,14 +49,18 @@ sudo make install
 #cd && wget https://download.01.org/opencv/2019/openvinotoolkit/R3/l_openvino_toolkit_dev_ubuntu18_p_2019.3.376.tgz
 #tar -xvzf l_openvino_toolkit_dev_ubuntu18_p_2019.3.376.tgz
 cd 
-wget https://download.01.org/opencv/2019/openvinotoolkit/R3/l_openvino_toolkit_runtime_ubuntu18_p_2019.3.376.tgz
-tar -xf l_openvino_toolkit_runtime_ubuntu18_p_2019.3.376.tgz
+#wget https://download.01.org/opencv/2019/openvinotoolkit/R3/l_openvino_toolkit_runtime_ubuntu18_p_2019.3.376.tgz
+wget https://download.01.org/opencv/2019/openvinotoolkit/R3/l_openvino_toolkit_runtime_raspbian_p_2019.3.334.tgz
+#git clone https://github.com/openvinotoolkit/openvino.git
+#tar -xf l_openvino_toolkit_runtime_ubuntu18_p_2019.3.376.tgz
 #sudo cp -R ./l_openvino_toolkit_runtime_raspbian_p_2019.2.242 /srv/chroot/buster_armhf/
-cp ~/l_openvino_toolkit_runtime_ubuntu18_p_2019.3.376 ~/dldt -r
+#cp ~/l_openvino_toolkit_runtime_ubuntu18_p_2019.3.376 ~/dldt -r
 cd ~/dldt/inference-engine
+#cd ~/openvino/
 git submodule init
 git submodule update --recursive
-sh ./install_dependencies.sh
+#sh install_build_dependencies.sh
+./install_dependencies.sh
 mkdir build && cd build
 cmake -DCMAKE_BUILD_TYPE=Release -DENABLE_MKL_DNN=OFF -DENABLE_CLDNN -DENABLE_GNA=OFF -DENABLE_SSE42=OFF -DTHREADING=SEQ ..
 make clean
@@ -112,7 +116,7 @@ echo -e "\n# virtualenv and virtualenvwrapper" >> ~/.bashrc
 #echo "export PATH=/home/ubuntu/.local/bin:/home/ubuntu/.virtualenvs/cv/bin"
 #echo "source $WORKON_HOME/cv/bin/activate" >> ~/.bashrc
 echo "export PATH=$PATH:/home/ubuntu/.local/bin" >> ~/.bashrc
-echo "alias python=python3.6" >> ~/.bashrc
+echo "alias python=python3.7" >> ~/.bashrc
 echo "alias pip=pip3" >> ~/.bashrc
 source ~/.bashrc
 
