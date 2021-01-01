@@ -14,7 +14,7 @@ alias python=python3.7
 alias pip=pip3
 
 #System lib&tools
-cd && sudo apt -y install build-essential unzip pkg-config
+cd && sudo apt -y install build-essential unzip pkg-config yum
 sudo apt -y install libjpeg-dev libpng-dev libtiff-dev
 sudo apt -y install libavcodec-dev libavformat-dev libswscale-dev libv4l-dev
 sudo apt -y install libxvidcore-dev libx264-dev
@@ -55,11 +55,11 @@ wget https://download.01.org/opencv/2019/openvinotoolkit/R3/l_openvino_toolkit_r
 #git clone https://github.com/openvinotoolkit/openvino.git
 #tar -xf l_openvino_toolkit_runtime_ubuntu18_p_2019.3.376.tgz
 #sudo cp -R ./l_openvino_toolkit_runtime_raspbian_p_2019.2.242 /srv/chroot/buster_armhf/
-#cp ~/l_openvino_toolkit_runtime_ubuntu18_p_2019.3.376 ~/dldt -r
-cd ~/dldt/inference-engine
+cp ~/l_openvino_toolkit_runtime_raspbian_p_2019.3.334 ~/dldt -r
+cd ~/dldt/inference_engine
 #cd ~/openvino/
-git submodule init
-git submodule update --recursive
+####git submodule init
+####git submodule update --recursive
 #sh install_build_dependencies.sh
 ./install_dependencies.sh
 mkdir build && cd build
